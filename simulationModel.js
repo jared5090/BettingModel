@@ -1,33 +1,17 @@
 
 
 var letters = ["A", "B", "C", "D"];
-
-var arrayNames = ['IDs', 'RandomLetters', 'Bets'];
 var colorNames = ['red', 'green', 'blue'];
 var formIDs = ['redBetsForm', 'greenBetsForm', 'blueBetsForm'];
+var arrayNames = ['IDs', 'RandomLetters', 'Bets'];
 var colorArrays = {
   redPoints: 0,
   greenPoints: 0,
   bluePoints: 0
 };
 
-//Purpose: create array with items from redLetters; the items are in random order.
-//Operation: each iteration, j = random number between 0 and 3.
-//If redRandomLetters array does not contain letter in the redLetters array at index j, push it to redRandomLetters.
-//perform loop until redRandomLetters is same length as redLetters. 
-function randomLetters(randomLetters) {
-  var j = 0;
-  while (randomLetters.length < letters.length) {
-    j = Math.floor(Math.random() * 4);
-    if (randomLetters.indexOf(letters[j]) === -1) {
-      randomLetters.push(letters[j]);
-    }
-  }
-}
-
-
 //Purpose: create HTML and IDs for drop-down menus.
-function generateTags(color, IDs, formID) {
+function generateTags(color, formID) {
   //create variable storing select tag and its dropdown options.
   var selectHTML =
   "<select>" +
@@ -45,25 +29,36 @@ function generateTags(color, IDs, formID) {
   for (var i = 0; i < letters.length; i++) {
     $('#' + formID).append(selectHTML);
     selectID = selectID2.concat(j.toString());
-    IDs.push(selectID);
+    colorArrays[color + 'IDs'].push(selectID);
     $('#' + formID).children('select').last().attr("id", selectID);
     j += 1;
   }
   $('#' + formID).append("<input type='submit' value='Place Bets'>")
 }
 
+//Purpose: create array with items from redLetters; the items are in random order.
+//Operation: each iteration, j = random number between 0 and 3.
+//push random letter to randomLetters array.
+//perform loop until redRandomLetters is same length as redLetters. 
+function randomiseLetters(color) {
+  var j = 0;
+  while (colorArrays[color + 'RandomLetters'].length < letters.length) {
+    j = Math.floor(Math.random() * 4);
+    colorArrays[color + 'RandomLetters'].unshift(letters[j]);
+  }
+}
+
 
 //Purpose: do an index-by-index comparison of userBets array and redRandomLetters array.
 // Add a point if there is a match.
-function checkBets(randomLetters, bets, points) {
+function checkBets(color) {
   var j = 0;
   for (var i = 0; i < letters.length; i++) {
-    if (bets[i] === randomLetters[j]) {
-      points += 1;
+    if (colorArrays[color + 'Bets'][i] === colorArrays[color + 'RandomLetters'][j]) {
+      colorArrays[color + 'Points'] += 1;
     }
     j += 1;
   }
-  return points;
 }
 
 
@@ -80,23 +75,29 @@ function displayColor() {
 }
 
 
-
 //Purpose: get options chosen by user.
 //Operation: add event handler to submit feature of #userBets form.
 //get value of each select tag and push it to userBets array.
 //activate other functions.
-function getBets(color, IDs, bets, formID) {
+function getBets(color, formID) {
   $('#' + formID).on('submit', function(event) {
     event.preventDefault();
+    randomiseLetters(color);
     for (var i = 0; i < letters.length; i++) {
-      bets.push($('#' + IDs[i]).val() );
+      colorArrays[color + 'Bets'].push($('#' + colorArrays[color + 'IDs'][i]).val() );
     }
-    colorArrays[color + 'Points'] = checkBets(
-      colorArrays[color + 'RandomLetters'],
-      colorArrays[color + 'Bets'],
-      colorArrays[color + 'Points'] );
-    console.log(colorArrays[color + 'Points']);
+    checkBets(color);
+    //testing
+    console.log(colorArrays[color + 'Bets']);
   });
+}
+
+function resetBets() {
+  for (var i = 0; i < colorNames.length; i++) {
+    colorArrays[colorNames[i] + 'RandomLetters'] = [];
+    colorArrays[colorNames[i] + 'Bets'] = [];
+    colorArrays[colorNames[i] + 'Points'] = 0;
+  }
 }
 
 
@@ -107,24 +108,21 @@ for (var i = 0; i < arrayNames.length; i++) {
   }
 }
 
-//call functions 
+//generateTags
 for (var i = 0; i < colorNames.length; i++) {
-  randomLetters(colorArrays[colorNames[i] + 'RandomLetters'] );
   generateTags(
     colorNames[i],
-    colorArrays[colorNames[i] + 'IDs'],
     formIDs[i] );
 }
-
 
 //setup event handlers
 for (var i = 0; i < colorNames.length; i++) {
   getBets(
     colorNames[i],
-    colorArrays[colorNames[i] + 'IDs'],
-    colorArrays[colorNames[i] + 'Bets'],
     formIDs[i] );
 }
+
+
 $('#checkBetsButton').on('submit', function(event) {
   event.preventDefault();
   displayColor();
@@ -133,14 +131,12 @@ $('#checkBetsButton').on('submit', function(event) {
     console.log(key);
     console.log(colorArrays[key]);
   }
+  resetBets();
+  for (var key in colorArrays) {
+    console.log(key);
+    console.log(colorArrays[key]);
+  }
 });
-
-
-//testing
-for (var key in colorArrays) {
-  console.log(key);
-  console.log(colorArrays[key]);
-}
      
 
 
