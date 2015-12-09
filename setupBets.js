@@ -1,8 +1,6 @@
 
-
 var letters = ["A", "B", "C", "D"];
 var colorNames = ['red', 'green', 'blue'];
-var formIDs = ['redBetsForm', 'greenBetsForm', 'blueBetsForm'];
 var arrayNames = ['IDs', 'RandomLetters', 'Bets'];
 var colorArrays = {
   redPoints: 0,
@@ -11,30 +9,28 @@ var colorArrays = {
 };
 
 //Purpose: create HTML and IDs for drop-down menus.
-function generateTags(color, formID) {
-  //create variable storing select tag and its dropdown options.
-  var selectHTML =
-  "<select>" +
-    "<option val='A'>A</option>" +
-    "<option val='B'>B</option>" +
-    "<option val='C'>C</option>" +
-    "<option val='D'>D</option>" +
-  "</select>";
+function generateTags(color) {
+  var formID = "#" + color + "BetsForm";
+  var positions = ['2nd', '3rd', '4th'];
+  var raceHTML = $("#" + color + "BetsForm").html();
 
   // each iteration: append a dropdown menu, then create and set a unique ID for it.
   // append submit button.
   var selectID = "";
   var selectID2 = color;
-  var j = 0;
-  for (var i = 0; i < letters.length; i++) {
-    $('#' + formID).append(selectHTML);
+  var j = 1;
+  for (var i = 0; i < positions.length; i++) {
+    $(formID).append(raceHTML);
+    $(formID).find('.position').last().text(positions[i]);
     selectID = selectID2.concat(j.toString());
     colorArrays[color + 'IDs'].push(selectID);
-    $('#' + formID).children('select').last().attr("id", selectID);
+    $(formID).find('select').last().attr("id", selectID);
     j += 1;
   }
-  $('#' + formID).append("<input type='submit' value='Place Bets'>")
+  $(formID).append("<input type='submit' value='Place Bet'>")
 }
+
+
 
 //Purpose: create array with items from redLetters; the items are in random order.
 //Operation: each iteration, j = random number between 0 and 3.
@@ -53,8 +49,8 @@ function randomiseLetters(color) {
 //Operation: add event handler to submit feature of #userBets form.
 //get value of each select tag and push it to userBets array.
 //activate other functions.
-function getBets(color, formID) {
-  $('#' + formID).on('submit', function(event) {
+function getBets(color) {
+  $('#' + color + "BetsForm").on('submit', function(event) {
     event.preventDefault();
     randomiseLetters(color);
     for (var i = 0; i < letters.length; i++) {
@@ -76,9 +72,9 @@ for (var i = 0; i < arrayNames.length; i++) {
 
 for (var i = 0; i < colorNames.length; i++) {
   //generateTags
-  generateTags(colorNames[i], formIDs[i] );
+  generateTags(colorNames[i]);
   //setup event handlers
-  getBets(colorNames[i], formIDs[i] );
+  getBets(colorNames[i]);
 }
 
 $('#checkBetsButton').on('submit', function(event) {
