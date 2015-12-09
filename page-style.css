@@ -43,29 +43,52 @@ code {
 /* Dropdown Menus
 -------------------------------------------------- */
 
-.betForm {
+/*table*/
+.formContainer {
+  margin: 25px 50px;
+  height: 5.4em;
+  width: 65%;
+  background-color: #004c80;
+}
+
+/*row1*/
+tr.rankRow {
+  display: inline-block;
+  height: 1.25em;
+  border: 2px solid green;
+}
+
+/*row2*/
+tr.formRow {
   display: inline-block;
   margin: auto;
-  height: 5em;
-  width: 90%;
-  border: 5px solid red;
-
+  height: 3.4em;
+  border: 2px solid red;
 }
 
-.formContainer {
-  border: 3px solid yellow;
+td {
+  width: 8em;
 }
 
+/*dropdown menus, button*/
 .betMenu {
-  margin-top: 2em;
-  border: 5px solid green;
+  margin: auto;
+  width: 8em;
+  height: 2.5em;
 }
 
-.position {
-  margin-bottom: 2em;
-  margin-left: 2em;
-  border: 2px solid blue;
+.betButton {
+  margin: 0 0 20px 25px;
 }
+
+/*ranking text*/
+.position {
+  font-size: 1em;
+  font-style: bold;
+  text-align: center;
+}
+
+
 
 /* Graphs
 -------------------------------------------------- */

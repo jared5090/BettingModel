@@ -24,11 +24,11 @@
     <![endif]-->
 
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="ico/favicon.png">
   </head>
 
 
@@ -57,42 +57,69 @@
 
     <!-- Begin page content -->
       <div class="page-header">
-        <h2>Palmdale Racing</h2>
+        <h2>Milford Racing</h2>
       </div>
-    <section>
-      <div class="formContainer">
-        <form class="betForm" id="redBetsForm">
-          <span class="text position">1st</span>
-          <select class="betMenu" id="red0">
-            <option val='Flipp'>Flip</option>
-            <option val='Boxer'>Boxer</option>
-            <option val='Spacey'>Spacey</option>
-            <option val='Ranger'>Ranger</option>
-          </select>
-        </form>
-      </div>
-      <div class="formContainer">
-        <form class="betForm" id="greenBetsForm">
-          <span class="text position">1st</span>
-          <select class="betMenu" id="green0">
-            <option val='Sammy'>Sammy</option>
-            <option val='Demon'>Demon</option>
-            <option val='Cheetah'>Cheetah</option>
-            <option val='Hot Dawg'>Hot Dawg</option>
-          </select>
-        </form>
-      </div>
-      <div class="formContainer">
-        <form class="betForm" id="blueBetsForm">
-          <span class="text position">1st</span>
-          <select class="betMenu" id="blue0">
-            <option val='Banderio'>Banderio</option>
-            <option val='Alpha'>Alpha</option>
-            <option val='Beast'>Beast</option>
-            <option val='QuickSilver'>Quicksilver</option>
-          </select>
-        </form>
-      </div>
+      <section>
+        <table class="formContainer">
+          <tr class="rankRow" id="redRank">
+            <td class="rankColumn">
+              <p class="position">1st</p>
+            </td>
+          </tr>
+          <tr class="formRow" id="redBetsForm">
+            <td class="formColumn">
+              <form>
+                <select class="betMenu" id="red0">
+                  <option val='nil'>-- select --</option>
+                  <option val='Flipp'>Flip</option>
+                  <option val='Boxer'>Boxer</option>
+                  <option val='Spacey'>Spacey</option>
+                  <option val='Ranger'>Ranger</option>
+                </select>
+              </form>
+            </td>
+          </tr>
+        </table>
+        <table class="formContainer">
+          <tr class="rankRow" id="greenRank">
+            <td class="rankColumn">
+              <p class="position">1st</p>
+            </td>
+          </tr>
+          <tr class="formRow" id="greenBetsForm">
+            <td class="formColumn">
+              <form>
+                <select class="betMenu" id="green0">
+                  <option val='nil'>-- select --</option>
+                  <option val='Sammy'>Sammy</option>
+                  <option val='Demon'>Demon</option>
+                  <option val='Cheetah'>Cheetah</option>
+                  <option val='Hot Dawg'>Hot Dawg</option>
+                </select>
+              </form>
+            </td>
+          </tr>
+        </table>
+        <table class="formContainer">
+          <tr class="rankRow" id="blueRank">
+            <td class="rankColumn">
+              <p class="position">1st</p>
+            </td>
+          </tr>
+          <tr class="formRow" id="blueBetsForm">
+            <td class="formColumn">
+              <form>
+                <select class="betMenu" id="blue0">
+                  <option val='nil'>-- select --</option>
+                  <option val='Banderio'>Banderio</option>
+                  <option val='Alpha'>Alpha</option>
+                  <option val='Beast'>Beast</option>
+                  <option val='QuickSilver'>Quicksilver</option>
+                </select>
+              </form>
+            </td>
+          </tr>
+        </table>
       <form id="checkBetsButton">
         <input type="submit" value="Check Bets">
       </form>
@@ -107,17 +134,17 @@
     <div id="graphs">
       <dl>
         <dt>Races</dt>
-        <dd class="percentage percentage-7">
+        <dd id='redRace' class="percentage">
           <span class="text">
             Red Race
           </span>
         </dd>
-        <dd class="percentage percentage-20">
+        <dd id='greenRace' class="percentage">
           <span class="text">
             Green Race
           </span>
         </dd>
-        <dd class="percentage percentage-2">
+        <dd id='blueRace' class="percentage">
           <span class="text">
             Blue Race
           </span>

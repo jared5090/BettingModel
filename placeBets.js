@@ -10,7 +10,6 @@ function checkBets(color) {
   }
 }
 
-
 /*
 Purpose: display a background color based on point level.
 function is designed for the css color format: rgb(0,0,0), specifically the red input.
@@ -23,12 +22,17 @@ function displayColor() {
     (colorArrays['bluePoints'] * 64) + ")" });
 }
 
-
-function resetBets() {
-  for (var i = 0; i < colorNames.length; i++) {
-    colorArrays[colorNames[i] + 'RandomLetters'] = [];
-    colorArrays[colorNames[i] + 'Bets'] = [];
-    colorArrays[colorNames[i] + 'Points'] = 0;
+function displayGraph(color) {
+  for (var i = 0; i < colorArrays[color + 'Points']; i++) {
+    if (colorArrays[color + 'Points'] === i) {
+      $('dd#' + color + 'Race').addClass('percentage-' + i);
+    }
   }
+}
+
+function resetBets(color) {
+    colorArrays[color + 'RandomLetters'] = [];
+    colorArrays[color + 'Bets'] = [];
+    colorArrays[color + 'Points'] = 0;
 }
 
