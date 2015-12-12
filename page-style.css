@@ -7,6 +7,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background-color: #FFF;
 }
 .footer {
   position: absolute;
@@ -40,30 +41,50 @@ code {
 }
 
 
+
 /* Dropdown Menus
 -------------------------------------------------- */
 
+h2 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h3 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.5em;
+  margin-left: 10em;
+}
+
+
+
+/* Dropdown Menus
+-------------------------------------------------- */
+
+/*container divs*/
+.container {
+}
+
 /*table*/
 .formContainer {
-  margin: 25px 50px;
+  margin: 10px 0 40px 0;
   height: 5.4em;
   width: 65%;
-  background-color: #004c80;
+  background-color: #FF7825;
 }
 
 /*row1*/
 tr.rankRow {
-  display: inline-block;
-  height: 1.25em;
-  border: 2px solid green;
+  height: 1em;
+  background-color: #FF9F64;
+  border-radius: 5px;
+  border: 3px solid red;
 }
 
 /*row2*/
 tr.formRow {
-  display: inline-block;
   margin: auto;
-  height: 3.4em;
-  border: 2px solid red;
+  height: 3em;
+  border: 3px solid green;
 }
 
 td {
@@ -72,13 +93,14 @@ td {
 
 /*dropdown menus, button*/
 .betMenu {
-  margin: auto;
   width: 8em;
   height: 2.5em;
 }
 
 .betButton {
+  font-family: 'Open Sans', sans-serif;
   margin: 0 0 20px 25px;
+  background-color: #CEDBE5;
 }
 
 /*ranking text*/
@@ -88,6 +110,13 @@ td {
   text-align: center;
 }
 
+#checkBetsButton {
+  font-family: 'Open Sans', sans-serif;
+  margin: 1.5em 0 0 10em;
+  padding: 0.75em 1em;
+  background-color: #CEDBE5;
+
+}
 
 
 /* Graphs
@@ -111,5 +140,5 @@ td {
 }
 
 #graphs {
-  margin-left: 10%;
+  margin: 10% 0 0 10%;
 }

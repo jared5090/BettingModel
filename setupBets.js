@@ -1,61 +1,95 @@
-
-var letters = ["A", "B", "C", "D"];
 var colorNames = ['red', 'green', 'blue'];
-var arrayNames = ['IDs', 'RandomLetters', 'Bets'];
-var positions = ['2nd', '3rd', '4th'];
+var arrayNames = ['IDs', 'RandomNames', 'Bets'];
+var positions = ['1st', '2nd', '3rd', '4th'];
 var colorArrays = {
   redPoints: 0,
   greenPoints: 0,
-  bluePoints: 0
+  bluePoints: 0,
+  redNames: ['Flip', 'Boxer', 'Spacey', 'Ranger'],
+  greenNames: ["Sammy", "Demon", "Cheetah", "Hot Dawg"],
+  blueNames: ["Banderio", "Alpha", "Beast", "Quicksilver"]
 };
+
 
 //Purpose: create HTML and IDs for drop-down menus.
 function createMenuRow(color) {
-  var formID = "#" + color + "BetsForm";
-  var raceHTML = $(formID).html();
-  var selectID = "";
-  var selectID2 = color;
-  var j = 1;
+  var columnID = "#" + color + "FormCopy";
+  var raceHTML = $(columnID).html();
 
-  for (var i = 0; i < positions.length; i++) {
+  for (var i = 0; i < 3; i++) {
     //append a dropdown menu.
-    $(formID).append(raceHTML);
-
-    //create unique ID, store it in array and set it in DOM.
-    selectID = selectID2.concat(j.toString());
-    colorArrays[color + 'IDs'].push(selectID);
-    $(formID).find('select').last().attr("id", selectID);
-    j += 1;
+    $(columnID).append(raceHTML);
   }
   //append form submit button.
-  $(formID).append(
-    "<td class='formColumn'>" +
+  $(columnID).append(
+    "<td>" +
     "<input type='submit' class='betButton' value='Place Bets'>" +
     "</td>");
 }
 
-//Purpose: create HTML for understanding drop-down menus.
-function createRankRow(color) {
-  var rank = '#' + color + 'Rank';
-  var rankHTML = $(rank).html();
 
+//Purpose: create HTML for understanding drop-down menus.
+function createRankRow() {
   for (var i = 0; i < positions.length; i++) {
     //append ranking text.
-    $(rank).append(rankHTML);
-    $(rank).find('.position').last().text(positions[i]);
+    $('.rankRow').append(
+      "<td>" +
+      "<p class='position'></p>" +
+      "</td>"
+      );
   }
+  var j = 0;
+  $('.position').each( function() {  
+    if (j % 4 === 0) {
+      j = 0;
+    }
+    $(this).text(positions[j]);
+    j += 1;   
+  });
 }
 
 
-//Purpose: create array with items from redLetters; the items are in random order.
+function createIDs(color) {
+  var selectID = "";
+  var selectID2 = color;
+  var j = 1;
+  var k = 0;
+
+  colorArrays[color + 'IDs'].push(color + '0');
+  for (var i = 0; i < 3; i++) {
+  //create unique ID, store it in array and set it in DOM.
+    selectID = selectID2.concat(j.toString());
+    colorArrays[color + 'IDs'].push(selectID);
+    j += 1;
+  }
+
+  $("#" + color + "BetsForm").find('select').each( function() {
+    $(this).attr("id", colorArrays[color + 'IDs'][k]);
+    k += 1;
+  });
+}
+
+
+//Purpose: create randomised array with items from Names.
 //Operation: each iteration, j = random number between 0 and 3.
-//push random letter to randomLetters array.
-//perform loop until redRandomLetters is same length as redLetters. 
-function randomiseLetters(color) {
+//push random name to RandomNames array.
+//perform loop until RandomNames is same length as Names. 
+function randomiseNames(color) {
   var j = 0;
-  while (colorArrays[color + 'RandomLetters'].length < letters.length) {
+  var containsName = false;
+  for (var i = 0; colorArrays[color + 'RandomNames'].length < colorArrays[color + 'Names'].length; i++) {
     j = Math.floor(Math.random() * 4);
-    colorArrays[color + 'RandomLetters'].unshift(letters[j]);
+    for (var i = 0; i < colorArrays[color + 'RandomNames'].length; i++) {
+      if (colorArrays[color + 'RandomNames'][i] === colorArrays[color + 'Names'][j]) {
+        containsName = true;
+        console.log('duplicate');
+        break;
+      }
+    }
+    if (containsName === false) {
+      colorArrays[color + 'RandomNames'].push(colorArrays[color + 'Names'][j]);
+    }
+    containsName = false;
   }
 }
 
@@ -67,8 +101,8 @@ function randomiseLetters(color) {
 function getBets(color) {
   $('#' + color + "BetsForm").on('submit', function(event) {
     event.preventDefault();
-    randomiseLetters(color);
-    for (var i = 0; i < letters.length; i++) {
+    randomiseNames(color);
+    for (var i = 0; i < colorArrays[color + 'Names'].length; i++) {
       colorArrays[color + 'Bets'].push($('#' + colorArrays[color + 'IDs'][i]).val() );
     }
     checkBets(color);
@@ -85,15 +119,21 @@ for (var i = 0; i < arrayNames.length; i++) {
   }
 }
 
+createRankRow();
 for (var i = 0; i < colorNames.length; i++) {
   //generateTags
   createMenuRow(colorNames[i]);
-  createRankRow(colorNames[i]);
+  createIDs(colorNames[i]);
   //setup event handlers
   getBets(colorNames[i]);
 }
+//testing
+  for (var key in colorArrays) {
+    console.log(key);
+    console.log(colorArrays[key]);
+  }
 
-$('#checkBetsButton').on('submit', function(event) {
+$('#checkBets').on('submit', function(event) {
   event.preventDefault();
   displayColor();
   //testing

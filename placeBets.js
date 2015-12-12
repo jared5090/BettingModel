@@ -1,12 +1,10 @@
-//Purpose: do an index-by-index comparison of userBets array and redRandomLetters array.
+//Purpose: do an index-by-index comparison of Bets array and RandomNames array.
 // Add a point if there is a match.
 function checkBets(color) {
-  var j = 0;
-  for (var i = 0; i < letters.length; i++) {
-    if (colorArrays[color + 'Bets'][i] === colorArrays[color + 'RandomLetters'][j]) {
+  for (var i = 0; i < colorArrays[color + 'Names'].length; i++) {
+    if (colorArrays[color + 'Bets'][i] === colorArrays[color + 'RandomNames'][i]) {
       colorArrays[color + 'Points'] += 1;
     }
-    j += 1;
   }
 }
 
@@ -22,17 +20,16 @@ function displayColor() {
     (colorArrays['bluePoints'] * 64) + ")" });
 }
 
+/*
+Purpose: display bar for each race that corresponds to points scored.
+*/
 function displayGraph(color) {
-  for (var i = 0; i < colorArrays[color + 'Points']; i++) {
-    if (colorArrays[color + 'Points'] === i) {
-      $('dd#' + color + 'Race').addClass('percentage-' + i);
-    }
-  }
+  $('dd#' + color + 'Race').addClass('percentage-' + colorArrays[color + 'Points']);
 }
 
 function resetBets(color) {
-    colorArrays[color + 'RandomLetters'] = [];
-    colorArrays[color + 'Bets'] = [];
-    colorArrays[color + 'Points'] = 0;
+  colorArrays[color + 'RandomNames'] = [];
+  colorArrays[color + 'Bets'] = [];
+  colorArrays[color + 'Points'] = 0;
 }
 
