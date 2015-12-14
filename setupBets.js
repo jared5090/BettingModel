@@ -1,93 +1,100 @@
-var colorNames = ['red', 'green', 'blue'];
-var arrayNames = ['IDs', 'RandomNames', 'Bets'];
-var positions = ['1st', '2nd', '3rd', '4th'];
-var colorArrays = {
-  redPoints: 0,
-  greenPoints: 0,
-  bluePoints: 0,
-  redNames: ['Flip', 'Boxer', 'Spacey', 'Ranger'],
-  greenNames: ["Sammy", "Demon", "Cheetah", "Hot Dawg"],
-  blueNames: ["Banderio", "Alpha", "Beast", "Quicksilver"]
+var arrayNames = ['IDs', 'Bets'];
+var positions = ["1st", "2nd", "3rd", "4th", "5th", "6th"];
+var letters = ["A", "B", "C", "D", "E", "F"];
+
+var raceNames = [
+  ['Flip', 'Boxer', 'Spacey', 'Ranger'],
+  ["Sammy", "Demon", "Cheetah", "Hot Dawg", "Pilgrim", "K9"],
+  ["Banderio", "Alpha", "Beast", "Quicksilver", "Chewtobacca"]
+  ];
+var raceRandomNames = [];
+
+var raceData = {
+  Points1: 0,
+  Points2: 0,
+  Points3: 0,
 };
 
-
-//Purpose: create HTML and IDs for drop-down menus.
-function createMenuRow(color) {
-  var columnID = "#" + color + "FormCopy";
-  var raceHTML = $(columnID).html();
-
-  for (var i = 0; i < 3; i++) {
-    //append a dropdown menu.
-    $(columnID).append(raceHTML);
-  }
-  //append form submit button.
-  $(columnID).append(
+  var raceTable = 
+  "<form>" +
+    "<table class='raceTable'>" +
+      "<tr class='formRow'>" +
+      "</tr>" +
+      "<tr class='nameRow'>" +
+      "</tr>" +
+    "</table>" +
+  "</form>";
+  var selectTags = 
     "<td>" +
+      "<select class='betMenu'>" +
+      "</select>" +
+    "</td>";
+  var optionTags = "<option></option>";
+  var nameTags =
+    "<td>" +
+      "<span class='name'></span>" +
+    "</td>";
+  var submitBet = "<td>" +
     "<input type='submit' class='betButton' value='Place Bets'>" +
-    "</td>");
-}
+    "</td>";
 
 
-//Purpose: create HTML for understanding drop-down menus.
-function createRankRow() {
-  for (var i = 0; i < positions.length; i++) {
-    //append ranking text.
-    $('.rankRow').append(
-      "<td>" +
-      "<p class='position'></p>" +
-      "</td>"
-      );
-  }
-  var j = 0;
-  $('.position').each( function() {  
-    if (j % 4 === 0) {
-      j = 0;
+function printTable() {
+  var betMenu = $('race' + [j]).find('.betMenu').last();
+  for (var j = 0; j < raceNames.length; j++) {
+    $('#raceLists').append(raceTable);
+    $('form').last().attr('id', 'race' + [j]);
+    for (var i = 0; i < raceNames[j].length; i++) {
+      $('race' + [j]).find('.formRow').append(selectTags);
+      betMenu.append(optionTags);
+      betMenu.attr('val', positions[i]);
+      betMenu.text(positions[i]);
+      $('race' + [j]).find('.nameRow').append(nameTags);
+      $('race' + [j]).find('.name').last().text(raceNames[j][i]);
     }
-    $(this).text(positions[j]);
-    j += 1;   
-  });
+  }
 }
 
 
-function createIDs(color) {
-  var selectID = "";
-  var selectID2 = color;
-  var j = 1;
+function createIDs() {
+  var selectID = '';
+  var selectID2 = 'race';
+  var j = 0;
   var k = 0;
 
-  colorArrays[color + 'IDs'].push(color + '0');
-  for (var i = 0; i < 3; i++) {
-  //create unique ID, store it in array and set it in DOM.
-    selectID = selectID2.concat(j.toString());
-    colorArrays[color + 'IDs'].push(selectID);
-    j += 1;
+  for (var j = 0; j < raceNames.length; j++) {
+    //create unique ID, store it in array and place it in DOM.
+    for (var i = 0; i < raceNames[j].length; i++) {
+      selectID = selectID2.concat(j.toString(), letters[i]);
+      raceData['IDs' + [j]].push(selectID);
+      $('.betMenu').each( function() {
+        $(this).attr("id", raceData['IDs' + [j]][k]);
+        k += 1;
+      });
+    }
   }
-
-  $("#" + color + "BetsForm").find('select').each( function() {
-    $(this).attr("id", colorArrays[color + 'IDs'][k]);
-    k += 1;
-  });
 }
 
 
-//Purpose: create randomised array with items from Names.
-//Operation: each iteration, j = random number between 0 and 3.
-//push random name to RandomNames array.
+//Create randomised array with items from Names.
 //perform loop until RandomNames is same length as Names. 
-function randomiseNames(color) {
-  var j = 0;
+function randomiseNames(race) {
+  var n = 0;
   var containsName = false;
-  for (var i = 0; colorArrays[color + 'RandomNames'].length < colorArrays[color + 'Names'].length; i++) {
-    j = Math.floor(Math.random() * 4);
-    for (var i = 0; i < colorArrays[color + 'RandomNames'].length; i++) {
-      if (colorArrays[color + 'RandomNames'][i] === colorArrays[color + 'Names'][j]) {
+  for (var i = 0; raceRandomNames[race].length < raceNames[race].length; i++) {
+    //n = random number between 0 and 3, used to get random index of Names array.
+    n = Math.floor(Math.random() * 4);
+    //check each index of RandomNames array to see if it already contains same item from Names array.
+    for (var j = 0; j < raceRandomNames[race].length; j++) {
+      if (raceRandomNames[race][j] === raceNames[race][n]) {
         containsName = true;
         console.log('duplicate');
         break;
       }
     }
+    //if no match found, push item to RandomNames. 
     if (containsName === false) {
-      colorArrays[color + 'RandomNames'].push(colorArrays[color + 'Names'][j]);
+      raceRandomNames[race].push(raceNames[race][n]);
     }
     containsName = false;
   }
@@ -95,56 +102,55 @@ function randomiseNames(color) {
 
 
 //Purpose: get options chosen by user.
-//Operation: add event handler to submit feature of #userBets form.
+//Operation: add event handler to submit button of #userBets form.
 //get value of each select tag and push it to userBets array.
 //activate other functions.
-function getBets(color) {
-  $('#' + color + "BetsForm").on('submit', function(event) {
-    event.preventDefault();
-    randomiseNames(color);
-    for (var i = 0; i < colorArrays[color + 'Names'].length; i++) {
-      colorArrays[color + 'Bets'].push($('#' + colorArrays[color + 'IDs'][i]).val() );
-    }
-    checkBets(color);
-    //testing
-    console.log(colorArrays[color + 'Bets']);
-  });
-}
-
-
-//create keys in colorArrays containing empty arrays.
-for (var i = 0; i < arrayNames.length; i++) {
-  for (var j = 0; j < colorNames.length; j++) {
-    colorArrays[colorNames[j] + arrayNames[i]] = [];
+function getBets() {
+  for (var i = 0; i < raceNames.length; i++) {
+    $('#race' + [i]).on('submit', function(event) {
+      event.preventDefault();
+      randomiseNames(i);
+      for (var j = 0; j < raceNames[i].length; j++) {
+        raceData['Bets' + [i]].push($('#' + raceData['IDs' + [i]][j]).val() );
+      }
+      //testing
+      console.log(raceData['Bets' + [i]]);
+      checkBets(i);
+      displayResults(i);
+      // resetBets(i);
+    });
   }
 }
 
-createRankRow();
-for (var i = 0; i < colorNames.length; i++) {
-  //generateTags
-  createMenuRow(colorNames[i]);
-  createIDs(colorNames[i]);
-  //setup event handlers
-  getBets(colorNames[i]);
+
+//create keys in raceData containing empty arrays.
+for (var i = 0; i < arrayNames.length; i++) {
+  for (var j = 0; j < Object.keys(raceNames).length; j++) {
+    raceData[arrayNames[i] + [j]] = [];
+    raceRandomNames.push([]);
+  }
 }
+
+printTable();
+createIDs();
+getBets();
+
 //testing
-  for (var key in colorArrays) {
+  for (var key in raceData) {
     console.log(key);
-    console.log(colorArrays[key]);
+    console.log(raceData[key]);
   }
 
 $('#checkBets').on('submit', function(event) {
   event.preventDefault();
-  displayColor();
   //testing
-  for (var key in colorArrays) {
+  for (var key in raceData) {
     console.log(key);
-    console.log(colorArrays[key]);
+    console.log(raceData[key]);
   }
-  for (var i = 0; i < colorNames.length; i++) {
-    displayGraph(colorNames[i]);
-    resetBets(colorNames[i]);
-  }
+  // for (var i = 0; i < colorNames.length; i++) {
+  //   displayGraph(colorNames[i]);
+  // }
   
 });
      

@@ -65,7 +65,7 @@ h3 {
 }
 
 /*table*/
-.formContainer {
+.raceTable {
   margin: 10px 0 40px 0;
   height: 5.4em;
   width: 65%;
@@ -73,7 +73,7 @@ h3 {
 }
 
 /*row1*/
-tr.rankRow {
+tr.nameRow {
   height: 1em;
   background-color: #FF9F64;
   border-radius: 5px;
