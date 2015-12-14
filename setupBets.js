@@ -18,6 +18,14 @@ var raceData = {
   var raceTable = 
   "<form>" +
     "<table class='raceTable'>" +
+      "<tr class='headRow'>" +
+        "<th>" +
+          "<p>Rank</p>" +
+        "</th>" +
+        "<th>" +
+          "<p>Athlete</p>" +
+        "</th>" +
+      "</tr>" +
       "<tr class='formRow'>" +
       "</tr>" +
       "<tr class='nameRow'>" +
@@ -32,7 +40,7 @@ var raceData = {
   var optionTags = "<option></option>";
   var nameTags =
     "<td>" +
-      "<span class='name'></span>" +
+      "<p class='name'></p>" +
     "</td>";
   var submitBet = "<td>" +
     "<input type='submit' class='betButton' value='Place Bets'>" +

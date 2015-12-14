@@ -60,41 +60,74 @@ h3 {
 /* Dropdown Menus
 -------------------------------------------------- */
 
-/*container divs*/
-.container {
-}
-
 /*table*/
 .raceTable {
   margin: 10px 0 40px 0;
   height: 5.4em;
-  width: 65%;
+  width: 18em;
   background-color: #FF7825;
 }
 
+.headRow {
+  background-color: #FF7825;
+  display: block;
+}
+
+.headRow p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  font-style: bold;
+  font-weight: 700;
+  text-align: center;
+  margin: 0.5em 0.75em;
+}
+
 /*row1*/
-tr.nameRow {
-  height: 1em;
-  background-color: #FF9F64;
-  border-radius: 5px;
-  border: 3px solid red;
+.formRow {
+  width: auto;
+  display: inline-block;
 }
 
 /*row2*/
-tr.formRow {
-  margin: auto;
-  height: 3em;
-  border: 3px solid green;
+.nameRow {
+  background-color: #FF9F64;
+  border-radius: 5px;
+  display: inline-block;
+  padding-right: 3em;
 }
+
+.nameRow p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  text-align: center;
+  margin: 0.4em 0.8em;
+}
+
+th {
+  width: auto;
+  height: 2.5em;
+}
+
 
 td {
-  width: 8em;
+  width: auto;
+  height: 2.5em;
+  display: block;
 }
 
-/*dropdown menus, button*/
+/*dropdown menus*/
 .betMenu {
   width: 8em;
   height: 2.5em;
+}
+
+option {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  text-align: center;
+  margin: auto;
 }
 
 .betButton {
