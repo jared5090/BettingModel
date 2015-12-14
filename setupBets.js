@@ -46,7 +46,6 @@ var raceData = {
     "<input type='submit' class='betButton' value='Place Bets'>" +
     "</td>";
 
-
 function printTable() {
   for (var i = 0; i < raceNames.length; i++) {
     $('#raceLists').append(raceTable);
@@ -61,6 +60,7 @@ function printTable() {
         $('#race' + i).find('option').last().text(positions[k]);
       }
     }
+    $('#race' + i).find('.nameRow').append(submitBet);
   }
 }
 
@@ -90,6 +90,9 @@ function createIDs() {
 function randomiseNames(race) {
   var n = 0;
   var containsName = false;
+
+  //problem with array (undefined)
+  raceRandomNames.push([]);
   for (var i = 0; raceRandomNames[race].length < raceNames[race].length; i++) {
     //n = random number between 0 and 3, used to get random index of Names array.
     n = Math.floor(Math.random() * 4);
@@ -134,9 +137,8 @@ function getBets() {
 
 //create keys in raceData containing empty arrays.
 for (var i = 0; i < arrayNames.length; i++) {
-  for (var j = 0; j < Object.keys(raceNames).length; j++) {
+  for (var j = 0; j < raceNames.length; j++) {
     raceData[arrayNames[i] + [j]] = [];
-    raceRandomNames.push([]);
   }
 }
 

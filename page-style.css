@@ -63,9 +63,11 @@ h3 {
 /*table*/
 .raceTable {
   margin: 10px 0 40px 0;
-  height: 5.4em;
-  width: 18em;
-  background-color: #FF7825;
+  padding: 1em;
+  height: 7em;
+  width: 22em;
+  background-color: #FF9F64;
+  border: 1px solid black;
 }
 
 .headRow {
@@ -84,16 +86,16 @@ h3 {
 
 /*row1*/
 .formRow {
-  width: auto;
+  width: 9em;
   display: inline-block;
 }
 
 /*row2*/
 .nameRow {
+  width: 9em;
   background-color: #FF9F64;
   border-radius: 5px;
   display: inline-block;
-  padding-right: 3em;
 }
 
 .nameRow p {
@@ -104,14 +106,19 @@ h3 {
   margin: 0.4em 0.8em;
 }
 
+.nameRow td {
+  border-color: #999966;
+  border-bottom: 0.5px solid;
+}
+
 th {
-  width: auto;
+  width: 9em;
   height: 2.5em;
 }
 
 
 td {
-  width: auto;
+  width: 9em;
   height: 2.5em;
   display: block;
 }
@@ -127,7 +134,6 @@ option {
   font-size: 1em;
   font-weight: 400;
   text-align: center;
-  margin: auto;
 }
 
 .betButton {
