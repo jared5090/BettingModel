@@ -40,17 +40,18 @@ var raceData = {
 
 
 function printTable() {
-  var betMenu = $('race' + [j]).find('.betMenu').last();
-  for (var j = 0; j < raceNames.length; j++) {
+  for (var i = 0; i < raceNames.length; i++) {
     $('#raceLists').append(raceTable);
-    $('form').last().attr('id', 'race' + [j]);
-    for (var i = 0; i < raceNames[j].length; i++) {
-      $('race' + [j]).find('.formRow').append(selectTags);
-      betMenu.append(optionTags);
-      betMenu.attr('val', positions[i]);
-      betMenu.text(positions[i]);
-      $('race' + [j]).find('.nameRow').append(nameTags);
-      $('race' + [j]).find('.name').last().text(raceNames[j][i]);
+    $('#raceLists').children('form').last().attr('id', 'race' + i);
+    for (var j = 0; j < raceNames[i].length; j++) {
+      $('#race' + i).find('.nameRow').append(nameTags);
+      $('#race' + i).find('.name').last().text(raceNames[i][j]);
+      $('#race' + i).find('.formRow').append(selectTags);
+      for (var k = 0; k < raceNames[i].length; k++) {
+        $('#race' + i).find('.betMenu').last().append(optionTags);
+        $('#race' + i).find('option').last().attr('val', positions[k]);
+        $('#race' + i).find('option').last().text(positions[k]);
+      }
     }
   }
 }
