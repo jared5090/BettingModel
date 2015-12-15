@@ -42,9 +42,7 @@ var raceData = {
     "<td>" +
       "<p class='name'></p>" +
     "</td>";
-  var submitBet = "<td>" +
-    "<input type='submit' class='betButton' value='Place Bets'>" +
-    "</td>";
+  var submitBet = "<input type='submit' class='betButton' value='Place Bets'>";
 
 function printTable() {
   for (var i = 0; i < raceNames.length; i++) {
@@ -54,13 +52,14 @@ function printTable() {
       $('#race' + i).find('.nameRow').append(nameTags);
       $('#race' + i).find('.name').last().text(raceNames[i][j]);
       $('#race' + i).find('.formRow').append(selectTags);
+      $('#race' + i).find('.betMenu').last().attr('val', raceNames[i][j]);
       for (var k = 0; k < raceNames[i].length; k++) {
         $('#race' + i).find('.betMenu').last().append(optionTags);
-        $('#race' + i).find('option').last().attr('val', positions[k]);
+        $('#race' + i).find('option').last().attr('val', k);
         $('#race' + i).find('option').last().text(positions[k]);
       }
     }
-    $('#race' + i).find('.nameRow').append(submitBet);
+    $('#race' + i).append(submitBet);
   }
 }
 
@@ -68,20 +67,21 @@ function printTable() {
 function createIDs() {
   var selectID = '';
   var selectID2 = 'race';
-  var j = 0;
   var k = 0;
 
-  for (var j = 0; j < raceNames.length; j++) {
+  for (var i = 0; i < raceNames.length; i++) {
     //create unique ID, store it in array and place it in DOM.
-    for (var i = 0; i < raceNames[j].length; i++) {
-      selectID = selectID2.concat(j.toString(), letters[i]);
-      raceData['IDs' + [j]].push(selectID);
-      $('.betMenu').each( function() {
-        $(this).attr("id", raceData['IDs' + [j]][k]);
-        k += 1;
-      });
+    for (var j = 0; j < raceNames[i].length; j++) {
+      selectID = selectID2.concat(i.toString(), letters[j]);
+      raceData['IDs' + [i]].push(selectID);
     }
+    k = 0;
+    $('#race' + i).find('.betMenu').each( function() {
+      $(this).attr("id", raceData['IDs' + [i]][k]);
+      k += 1;
+    });
   }
+  
 }
 
 
@@ -91,8 +91,6 @@ function randomiseNames(race) {
   var n = 0;
   var containsName = false;
 
-  //problem with array (undefined)
-  raceRandomNames.push([]);
   for (var i = 0; raceRandomNames[race].length < raceNames[race].length; i++) {
     //n = random number between 0 and 3, used to get random index of Names array.
     n = Math.floor(Math.random() * 4);
@@ -110,6 +108,7 @@ function randomiseNames(race) {
     }
     containsName = false;
   }
+  console.log(raceRandomNames[race]);
 }
 
 
@@ -117,21 +116,33 @@ function randomiseNames(race) {
 //Operation: add event handler to submit button of #userBets form.
 //get value of each select tag and push it to userBets array.
 //activate other functions.
-function getBets() {
-  for (var i = 0; i < raceNames.length; i++) {
-    $('#race' + [i]).on('submit', function(event) {
-      event.preventDefault();
-      randomiseNames(i);
-      for (var j = 0; j < raceNames[i].length; j++) {
-        raceData['Bets' + [i]].push($('#' + raceData['IDs' + [i]][j]).val() );
+function getBets(race) { 
+  $('#race' + [race]).on('submit', function(event) {
+    event.preventDefault();
+    randomiseNames(race);
+    var position = '';
+    var name = '';
+    var ranking = {};
+    for (var j = 0; j < raceNames[race].length; j++) {
+      position = $('#' + raceData['IDs' + [race]][j]).val();
+      name = $('#' + raceData['IDs' + [race]][j]).attr('val');
+      console.log("name: " + name + "\nposition: " + position);
+      ranking[position] = name;
+    }
+    for (var key in ranking) {
+        console.log("key: " + key + "\nvalue: " + ranking[key]);
       }
-      //testing
-      console.log(raceData['Bets' + [i]]);
-      checkBets(i);
-      displayResults(i);
-      // resetBets(i);
-    });
-  }
+    for (var j = 0; j < raceNames[race].length; j++) {
+      raceData['Bets' + [race]].push(ranking[positions[j]]);
+    }
+
+    //testing
+    console.log(raceData['Bets' + [race]]);
+    checkBets(race);
+    console.log("Points: " + raceData['Points' + race]);
+    displayResults(race);
+    // resetBets(i);
+  });
 }
 
 
@@ -142,9 +153,14 @@ for (var i = 0; i < arrayNames.length; i++) {
   }
 }
 
+
 printTable();
 createIDs();
-getBets();
+
+for (var i = 0; i < raceNames.length; i++) {
+  raceRandomNames.push([]);
+  getBets(i);
+}
 
 //testing
   for (var key in raceData) {
