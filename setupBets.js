@@ -3,16 +3,16 @@ var positions = ["1st", "2nd", "3rd", "4th", "5th", "6th"];
 var letters = ["A", "B", "C", "D", "E", "F"];
 
 var raceNames = [
-  ['Flip', 'Boxer', 'Spacey', 'Ranger'],
+  ['Flip', 'Boxer', 'Alpha', 'Ranger'],
   ["Sammy", "Demon", "Cheetah", "Hot Dawg", "Pilgrim", "K9"],
-  ["Banderio", "Alpha", "Beast", "Quicksilver", "Chewtobacca"]
+  ["Demon", "Alpha", "Pilgrim", "Quicksilver", "Chewtobacca"]
   ];
 var raceRandomNames = [];
 
 var raceData = {
+  Points0: 0,
   Points1: 0,
   Points2: 0,
-  Points3: 0,
 };
 
   var raceTable = 
@@ -90,15 +90,13 @@ function createIDs() {
 function randomiseNames(race) {
   var n = 0;
   var containsName = false;
-
   for (var i = 0; raceRandomNames[race].length < raceNames[race].length; i++) {
     //n = random number between 0 and 3, used to get random index of Names array.
-    n = Math.floor(Math.random() * 4);
+    n = Math.floor(Math.random() * raceNames[race].length);
     //check each index of RandomNames array to see if it already contains same item from Names array.
     for (var j = 0; j < raceRandomNames[race].length; j++) {
       if (raceRandomNames[race][j] === raceNames[race][n]) {
         containsName = true;
-        console.log('duplicate');
         break;
       }
     }
@@ -116,7 +114,7 @@ function randomiseNames(race) {
 //Operation: add event handler to submit button of #userBets form.
 //get value of each select tag and push it to userBets array.
 //activate other functions.
-function getBets(race) { 
+function getBets(race) {
   $('#race' + [race]).on('submit', function(event) {
     event.preventDefault();
     randomiseNames(race);
@@ -139,7 +137,7 @@ function getBets(race) {
     //testing
     console.log(raceData['Bets' + [race]]);
     checkBets(race);
-    console.log("Points: " + raceData['Points' + race]);
+    console.log("Points" + race + ": " + raceData['Points' + race]);
     displayResults(race);
     // resetBets(i);
   });

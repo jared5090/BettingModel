@@ -9,12 +9,13 @@ function checkBets(race) {
 }
 
 function displayResults(race) {
-  $('#raceLists').append(raceTable).attr('id', '#results' + race);
+  $('#raceLists').append(raceTable);
+  $('.raceTable').last().attr('id', '#results' + race);
   for (var i = 0; i < raceRandomNames[race].length; i++) {
     $('#results' + race).find('.formRow').append(nameTags);
-    $('#results' + race).find('.formRow').children('span').append(positions[i]);
+    $('#results' + race).find('.formRow').children('p').append(positions[i]);
     $('#results' + race).find('.nameRow').append(nameTags);
-    $('#results' + race).find('.nameRow').children('span').append(raceRandomNames[race][i]);
+    $('#results' + race).find('.nameRow').children('p').append(raceRandomNames[race][i]);
   }
 }
 
