@@ -40,13 +40,18 @@ code {
   font-size: 80%;
 }
 
-.container {
+.container_table {
   border: 2px solid orange;
+  display: inline-block;
 }
 
 .container > form {
   border: 2px solid black;
   display: inline-block;
+}
+
+.container {
+  border: 2px solid red;
 }
 
 /* Text Format
@@ -59,7 +64,6 @@ h2 {
 h3 {
   font-family: 'Open Sans', sans-serif;
   font-size: 1.5em;
-  margin-left: 10em;
 }
 
 
@@ -67,22 +71,24 @@ h3 {
 -------------------------------------------------- */
 
 #raceList {
-  width: 8em;
   border: 2px solid blue;
   display: inline-block;
 }
 
-
-
-
+#raceList button {
+  margin: 1em auto;
+  display: block;
+}
 
 
 /* Dropdown Menus
 -------------------------------------------------- */
 
+.hide_race {
+  display: none;
+}
+
 #currentRace {
-  width: 50%;
-  margin: 0 15em;
   border: 2px solid green;
   display: inline-block;
 }
@@ -96,11 +102,6 @@ table {
 
 .head_row {
   background-color: #FF7825;
-}
-
-.table_row {
-  margin: auto;
-  width: auto;
 }
 
 td {
