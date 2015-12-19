@@ -42,7 +42,6 @@ code {
 
 .container_table {
   border: 2px solid orange;
-  display: inline-block;
 }
 
 .container > form {
@@ -84,7 +83,7 @@ h3 {
 /* Dropdown Menus
 -------------------------------------------------- */
 
-.hide_race {
+.hide_table {
   display: none;
 }
 

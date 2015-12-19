@@ -26,14 +26,14 @@ function printButtons(race) {
   $('#button_race' + race).text('Race ' + race);
   $('#button_race' + race).on('click', function(event) {
     event.preventDefault();
-    console.log('listener - race: ' + race);
-    printTable(race);
-    createIDs(race);
-    // $('#race' + i).parent('.container_table').addClass()
-    // $('#race' + i).parent('.container_table').css('display', 'none');
+    if (!(document.getElementById('race' + race)) ) {
+      printTable(race);
+      createIDs(race);
+    }
+    $('.container_table').addClass('hide_table');
+      $('#race' + race).closest('.container_table').removeClass('hide_table');
   });
 }
-
 
 function printTable(race) {
   var newRow = 
@@ -43,12 +43,11 @@ function printTable(race) {
       "</td>" +
       "<td></td>" +
     "</tr>";
-  if ($('#currentRace').find('form').last().attr('id') !== undefined) {
+  if ($('#currentRace').find('form').last().attr('id')) {
     $('#currentRace').append(raceTable);
   }
   $('#currentRace').find('form').last().attr('id', 'race' + race);
   var raceID = $('#race' + race);
-  console.log(raceID);
   for (var j = 0; j < raceNames[race].length; j++) {
     raceID.find('tr').last().after(newRow);
     raceID.find('tr').last().find('td').last().text(raceNames[race][j]);
