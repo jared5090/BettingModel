@@ -40,9 +40,16 @@ code {
   font-size: 80%;
 }
 
+.container {
+  border: 2px solid orange;
+}
 
+.container > form {
+  border: 2px solid black;
+  display: inline-block;
+}
 
-/* Dropdown Menus
+/* Text Format
 -------------------------------------------------- */
 
 h2 {
@@ -56,84 +63,62 @@ h3 {
 }
 
 
+/* Race List
+-------------------------------------------------- */
+
+#raceList {
+  width: 8em;
+  border: 2px solid blue;
+  display: inline-block;
+}
+
+
+
+
+
 
 /* Dropdown Menus
 -------------------------------------------------- */
 
-/*table*/
-.raceTable {
+#currentRace {
+  width: 50%;
+  margin: 0 15em;
+  border: 2px solid green;
+  display: inline-block;
+}
+
+table {
   margin: 10px 0 40px 0;
   padding: 1em;
-  height: 7em;
-  width: 22em;
   background-color: #FF9F64;
   border: 1px solid black;
 }
 
-.headRow {
+.head_row {
   background-color: #FF7825;
-  display: block;
 }
 
-.headRow p {
+.table_row {
+  margin: auto;
+  width: auto;
+}
+
+td {
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
   font-style: bold;
   font-weight: 700;
   text-align: center;
-  margin: 0.5em 0.75em;
+  padding: 0.2em 1.25em;
+
 }
 
-/*row1*/
-.formRow {
-  width: 9em;
-  display: inline-block;
-}
-
-/*row2*/
-.nameRow {
-  width: 9em;
-  background-color: #FF9F64;
-  border-radius: 5px;
-  display: inline-block;
-}
-
-.nameRow p {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1em;
-  font-weight: 400;
-  text-align: center;
-  margin: 0.4em 0.8em;
-}
-
-.nameRow td {
-  border-color: #999966;
-  border-bottom: 0.5px solid;
-}
-
-th {
-  width: 9em;
-  height: 2.5em;
-}
-
-
-td {
-  width: 9em;
-  height: 2.5em;
-  display: block;
-}
 
 /*dropdown menus*/
 .betMenu {
-  width: 8em;
+  width: 6em;
   height: 2.5em;
-}
-
-option {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1em;
-  font-weight: 400;
-  text-align: center;
+  margin: 0.4em 0.6em;
 }
 
 .betButton {
@@ -142,19 +127,27 @@ option {
   background-color: #CEDBE5;
 }
 
-/*ranking text*/
-.position {
-  font-size: 1em;
-  font-style: bold;
-  text-align: center;
-}
-
 #checkBetsButton {
   font-family: 'Open Sans', sans-serif;
   margin: 1.5em 0 0 10em;
   padding: 0.75em 1em;
   background-color: #CEDBE5;
+}
 
+
+/* Results
+-------------------------------------------------- */
+
+.list_width {
+  width: 5em;
+}
+
+.name_width {
+  width: 8em;
+}
+
+.inline_block {
+  display: inline-block;
 }
 
 

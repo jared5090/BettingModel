@@ -9,13 +9,28 @@ function checkBets(race) {
 }
 
 function displayResults(race) {
-  $('#raceLists').append(raceTable);
-  $('.raceTable').last().attr('id', '#results' + race);
-  for (var i = 0; i < raceRandomNames[race].length; i++) {
-    $('#results' + race).find('.formRow').append(nameTags);
-    $('#results' + race).find('.formRow').children('p').append(positions[i]);
-    $('#results' + race).find('.nameRow').append(nameTags);
-    $('#results' + race).find('.nameRow').children('p').append(raceRandomNames[race][i]);
+  var newRow =
+    "<tr>" +
+      "<td></td>" +
+      "<td></td>" +
+      "<td></td>" +
+    "</tr>";
+  var resultsTable = $('#results').html();
+  if ($('#results').children('table').last().attr('id') !== undefined ) {
+    $('#results').append(resultsTable);
+  }
+  $('#results').children('table').last().attr('id', 'results' + race);
+  for (var i = 0; i < raceNames[race].length; i++) {
+    $('#results' + race).find('tr').last().after(newRow);
+    $('#results' + race).find('tr').last().find('td').first().append(positions[i]);
+    //this row lists the positions you chose for each athlete.
+    for (var j = 0; j < raceRandomNames[race].length; j++) {
+      if (betRanking[positions[j]] === raceRandomNames[race][i]) {
+        $('#results' + race).find('tr').last().find('td').first().next().append(positions[j]);
+        break;
+      }   
+    }
+    $('#results' + race).find('tr').last().find('td').last().append(raceRandomNames[race][i]);
   }
 }
 
