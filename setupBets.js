@@ -30,8 +30,8 @@ function printButtons(race) {
       printTable(race);
       createIDs(race);
     }
-    $('.container_table').addClass('hide_table');
-      $('#race' + race).closest('.container_table').removeClass('hide_table');
+    $('.container_table').removeClass('display_table');
+      $('#race' + race).closest('.container_table').addClass('display_table');
   });
 }
 
@@ -48,6 +48,7 @@ function printTable(race) {
   }
   $('#currentRace').find('form').last().attr('id', 'race' + race);
   var raceID = $('#race' + race);
+  raceID.before('<h3>Race ' + (race + 1).toString() + '</h3>');
   for (var j = 0; j < raceNames[race].length; j++) {
     raceID.find('tr').last().after(newRow);
     raceID.find('tr').last().find('td').last().text(raceNames[race][j]);
@@ -148,9 +149,12 @@ for (var i = 0; i < arrayNames.length; i++) {
 //call functions
 
 
-// $('submit_bet').on('click', function() {
-//   $('#currentRace').submit
-// });
+$('#submit_bet').on('click', function(event) {
+  var formID = $('#currentRace').find('.display_table').find('form').attr('id');
+  console.log(formID);
+  $('#' + formID).submit();
+  event.preventDefault();
+});
 
 for (var i = 0; i < raceNames.length; i++) {
   printButtons(i);
