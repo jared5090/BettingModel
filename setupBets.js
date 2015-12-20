@@ -132,8 +132,17 @@ function getBets(race) {
     console.log(raceData['Bets' + [race]]);
     checkBets(race);
     console.log("Points" + race + ": " + raceData['Points' + race]);
-    displayResults(race);
     // resetBets(i);
+    displayResults(race);
+  });
+  
+  $('#submit_bet').on('click', function(event) {
+    event.preventDefault();
+    return false;
+    $('#race' + race).trigger('submit', function(event) {
+      event.preventDefault();
+      return false;
+    });
   });
 }
 
@@ -148,13 +157,6 @@ for (var i = 0; i < arrayNames.length; i++) {
 
 //call functions
 
-
-$('#submit_bet').on('click', function(event) {
-  var formID = $('#currentRace').find('.display_table').find('form').attr('id');
-  console.log(formID);
-  $('#' + formID).submit();
-  event.preventDefault();
-});
 
 for (var i = 0; i < raceNames.length; i++) {
   printButtons(i);
@@ -171,18 +173,6 @@ for (var i = 0; i < raceNames.length; i++) {
     console.log(raceData[key]);
   }
 
-$('#checkBets').on('submit', function(event) {
-  event.preventDefault();
-  //testing
-  for (var key in raceData) {
-    console.log(key);
-    console.log(raceData[key]);
-  }
-  // for (var i = 0; i < colorNames.length; i++) {
-  //   displayGraph(colorNames[i]);
-  // }
-  
-});
      
 
 

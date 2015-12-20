@@ -16,10 +16,11 @@ function displayResults(race) {
       "<td></td>" +
     "</tr>";
   var resultsTable = $('#results').html();
-  if ($('#results').children('table').last().attr('id') !== undefined ) {
+  //if last table has no ID, then it is the default empty table.
+  if ($('#results').find('table').last().attr('id') !== undefined ) {
     $('#results').append(resultsTable);
   }
-  $('#results').children('table').last().attr('id', 'results' + race);
+  $('#results').find('table').last().attr('id', 'results' + race);
   for (var i = 0; i < raceNames[race].length; i++) {
     $('#results' + race).find('tr').last().after(newRow);
     $('#results' + race).find('tr').last().find('td').first().append(positions[i]);
