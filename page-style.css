@@ -7,6 +7,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background-color: #FFF;
 }
 .footer {
   position: absolute;
@@ -39,33 +40,116 @@ code {
   font-size: 80%;
 }
 
+.container_table {
+  border: 2px solid orange;
+}
+
+.container > form {
+  border: 2px solid black;
+  display: inline-block;
+}
+
+.container {
+  border: 2px solid red;
+}
+
+/* Text Format
+-------------------------------------------------- */
+
+h2 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h3 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.5em;
+}
+
+
+/* Race List
+-------------------------------------------------- */
+
+#raceList {
+  border: 2px solid blue;
+  display: inline-block;
+}
+
+#raceList button {
+  margin: 1em auto;
+  display: block;
+}
+
 
 /* Dropdown Menus
 -------------------------------------------------- */
 
-.betForm {
+.hide_table {
+  display: none;
+}
+
+#currentRace {
+  border: 2px solid green;
   display: inline-block;
-  margin: auto;
-  height: 5em;
-  width: 90%;
-  border: 5px solid red;
+}
+
+table {
+  margin: 10px 0 40px 0;
+  padding: 1em;
+  background-color: #FF9F64;
+  border: 1px solid black;
+}
+
+.head_row {
+  background-color: #FF7825;
+}
+
+td {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  font-style: bold;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.2em 1.25em;
 
 }
 
-.formContainer {
-  border: 3px solid yellow;
-}
 
+/*dropdown menus*/
 .betMenu {
-  margin-top: 2em;
-  border: 5px solid green;
+  width: 6em;
+  height: 2.5em;
+  margin: 0.4em 0.6em;
 }
 
-.position {
-  margin-bottom: 2em;
-  margin-left: 2em;
-  border: 2px solid blue;
+.betButton {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0 0 20px 25px;
+  background-color: #CEDBE5;
 }
+
+#checkBetsButton {
+  font-family: 'Open Sans', sans-serif;
+  margin: 1.5em 0 0 10em;
+  padding: 0.75em 1em;
+  background-color: #CEDBE5;
+}
+
+
+/* Results
+-------------------------------------------------- */
+
+.list_width {
+  width: 5em;
+}
+
+.name_width {
+  width: 8em;
+}
+
+.inline_block {
+  display: inline-block;
+}
+
 
 /* Graphs
 -------------------------------------------------- */
@@ -88,5 +172,5 @@ code {
 }
 
 #graphs {
-  margin-left: 10%;
+  margin: 10% 0 0 10%;
 }
