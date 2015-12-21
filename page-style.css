@@ -88,7 +88,7 @@ h3 {
   display: inline-block;
 }
 
-#currentRace {
+#current_race {
   border: 2px solid green;
   display: inline-block;
 }
@@ -125,13 +125,6 @@ td {
 .betButton {
   font-family: 'Open Sans', sans-serif;
   margin: 0 0 20px 25px;
-  background-color: #CEDBE5;
-}
-
-#checkBetsButton {
-  font-family: 'Open Sans', sans-serif;
-  margin: 1.5em 0 0 10em;
-  padding: 0.75em 1em;
   background-color: #CEDBE5;
 }
 

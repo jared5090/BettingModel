@@ -1,3 +1,5 @@
+var resultsTable = $('#results').html();
+
 //Purpose: do an index-by-index comparison of Bets array and RandomNames array.
 // Add a point if there is a match.
 function checkBets(race) {
@@ -9,13 +11,13 @@ function checkBets(race) {
 }
 
 function displayResults(race) {
+  console.log(' ran displayResults');
   var newRow =
     "<tr>" +
       "<td></td>" +
       "<td></td>" +
       "<td></td>" +
     "</tr>";
-  var resultsTable = $('#results').html();
   //if last table has no ID, then it is the default empty table.
   if ($('#results').find('table').last().attr('id') !== undefined ) {
     $('#results').append(resultsTable);
@@ -33,6 +35,7 @@ function displayResults(race) {
     }
     $('#results' + race).find('tr').last().find('td').last().append(raceRandomNames[race][i]);
   }
+  $('#results' + race).closest('.container_table').addClass('display_table');
 }
 
 
