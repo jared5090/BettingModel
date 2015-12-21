@@ -18,23 +18,27 @@ function displayResults(race) {
       "<td></td>" +
       "<td></td>" +
     "</tr>";
-  //if last table has no ID, then it is the default empty table.
+  //if last table has no id, then it is the default empty table.
   if ($('#results').find('table').last().attr('id') !== undefined ) {
     $('#results').append(resultsTable);
   }
+  //set table id
   $('#results').find('table').last().attr('id', 'results' + race);
+
+  //print table rows.
   for (var i = 0; i < raceNames[race].length; i++) {
     $('#results' + race).find('tr').last().after(newRow);
-    $('#results' + race).find('tr').last().find('td').first().append(positions[i]);
-    //this row lists the positions you chose for each athlete.
+    $('#results' + race).find('tr').last().find('td').first().append(raceRandomNames[race][i]);
+    $('#results' + race).find('tr').last().find('td').first().next().append(positions[i]);
+    //this row (Your Bets) lists the positions chosen for each athlete.
     for (var j = 0; j < raceRandomNames[race].length; j++) {
       if (betRanking[positions[j]] === raceRandomNames[race][i]) {
-        $('#results' + race).find('tr').last().find('td').first().next().append(positions[j]);
+        $('#results' + race).find('tr').last().find('td').last().append(positions[j]);
         break;
       }   
     }
-    $('#results' + race).find('tr').last().find('td').last().append(raceRandomNames[race][i]);
   }
+  //display results table.
   $('#results' + race).closest('.container_table').addClass('display_table');
 }
 
