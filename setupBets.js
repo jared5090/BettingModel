@@ -27,7 +27,6 @@ function printButtons(race) {
       printTable(race);
       createIDs(race);
       getBets(race);
-      resetBets(race);
     }
     displayTable(race);
   });
@@ -51,13 +50,11 @@ function printTable(race) {
     "</tr>";
   $('#current_race').append(raceTable);
   //set race ids for table and buttons
-  $('#current_race').find('table').last().attr('id', 'race' + race);
+  $('#current_race').children('div').last().attr('id', 'race' + race);
   $('#current_race').find('.submit_button').last().attr('id', 'submit_race' + race);
-  $('#current_race').find('.reset_button').last().attr('id', 'reset_race' + race);
-  $('#reset_race' + race).hide();
   var raceID = $('#race' + race);
   //print race title
-  raceID.before("<h3>Race " + letters[race] + "</h3>");
+  raceID.prepend("<h3>Race " + letters[race] + "</h3>");
   //print table rows. In first column, name is printed from 2D array.
   //In second column, options are appended to a dropdown menu.
   //First option is the default ('select').
@@ -128,9 +125,9 @@ function randomiseNames(race) {
 function getBets(race) {
   console.log('getBets function');
   $('#submit_race' + race).on('click', function(event) {
+    event.preventDefault();
     $('#submit_race' + race).hide();
     $('#reset_race' + race).show();
-    event.preventDefault();
     randomiseNames(race);
     var position = '';
     var name = '';
