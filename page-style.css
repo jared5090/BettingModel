@@ -40,11 +40,6 @@ code {
   font-size: 80%;
 }
 
-.container_table {
-  border: 2px solid orange;
-  display: none;
-}
-
 .container > form {
   border: 2px solid black;
   display: inline-block;
@@ -53,6 +48,26 @@ code {
 .container {
   border: 2px solid red;
 }
+
+
+
+/* Show/hide elements
+-------------------------------------------------- */
+
+.hidden {
+  display: none;
+}
+
+.container_table {
+  border: 2px solid orange;
+  display: none;
+}
+
+.display_table {
+  display: inline-block;
+}
+
+
 
 /* Text Format
 -------------------------------------------------- */
@@ -83,10 +98,6 @@ h3 {
 
 /* Dropdown Menus
 -------------------------------------------------- */
-
-.display_table {
-  display: inline-block;
-}
 
 #current_race {
   border: 2px solid green;

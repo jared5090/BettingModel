@@ -1,5 +1,3 @@
-var resultsTable = $('#results').html();
-
 //Purpose: do an index-by-index comparison of Bets array and RandomNames array.
 // Add a point if there is a match.
 function checkBets(race) {
@@ -18,13 +16,8 @@ function displayResults(race) {
       "<td></td>" +
       "<td></td>" +
     "</tr>";
-  //if last table has no id, then it is the default empty table.
-  if ($('#results').find('table').last().attr('id') !== undefined ) {
-    $('#results').append(resultsTable);
-  }
-  //set table id
+  $('#results').append(resultsTable);
   $('#results').find('table').last().attr('id', 'results' + race);
-
   //print table rows.
   for (var i = 0; i < raceNames[race].length; i++) {
     $('#results' + race).find('tr').last().after(newRow);
@@ -50,9 +43,20 @@ Purpose: display bar for each race that corresponds to points scored.
 //   $('dd#' + 'race' + race).addClass('percentage-' + raceData['Points' + race]);
 // }
 
-// function resetBets(race) {
-//   raceData['RandomNames' + race] = [];
-//   raceData['Bets' + race] = [];
-//   raceData['Points' + race] = 0;
-// }
+function resetBets(race) {
+  $('#reset_race' + race).on('click', function(event) {
+    event.preventDefault();
+    $('#reset_race' + race).hide();
+    $('#submit_race' + race).show();
+    $('#results' + race).remove();
+    $('.betMenu').each( function() {
+      $(this).find('option').first().html(
+        "<option class='format_text' selected>select</option>");
+    });
+    raceData['RandomNames' + race] = [];
+    raceData['Bets' + race] = [];
+    raceData['Points' + race] = 0;
+
+  });
+}
 

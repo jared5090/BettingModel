@@ -11,7 +11,8 @@ var raceRandomNames = [];
 var betRanking = {};
 var raceData = {};
 
-var raceTable = $('#current_race').html();
+var raceTable = $('#current_race_template').html();
+var resultsTable = $('#results_template').html();
 var optionTags = "<option class='format_text'></option>";
 var button = "<button></button>";
 
@@ -28,6 +29,7 @@ function printButtons(race) {
       printTable(race);
       createIDs(race);
       getBets(race);
+      resetBets(race);
     }
     displayTable(race);
   });
@@ -49,13 +51,12 @@ function printTable(race) {
         "<select class='betMenu'></select>" +
       "</td>" +
     "</tr>";
-  //if no table printed yet, use default table.
-  if ($('#current_race').find('table').last().attr('id')) {
-    $('#current_race').append(raceTable);
-  }
-  //set race ids for table and submit button
+  $('#current_race').append(raceTable);
+  //set race ids for table and buttons
   $('#current_race').find('table').last().attr('id', 'race' + race);
   $('#current_race').find('.submit_button').last().attr('id', 'submit_race' + race);
+  $('#current_race').find('.reset_button').last().attr('id', 'reset_race' + race);
+  $('#reset_race' + race).hide();
   var raceID = $('#race' + race);
   //print race title
   raceID.before('<h3>Race ' + letters[race] + '</h3>');
@@ -112,7 +113,7 @@ function randomiseNames(race) {
         break;
       }
     }
-    //if no match found, push name to RandomNames. 
+    //if no match found, push name to RandomNames.
     if (containsName === false) {
       raceRandomNames[race].push(raceNames[race][n]);
     }
@@ -129,6 +130,8 @@ function randomiseNames(race) {
 function getBets(race) {
   console.log('getBets function');
   $('#submit_race' + race).on('click', function(event) {
+    $('#submit_race' + race).hide();
+    $('#reset_race' + race).show();
     event.preventDefault();
     console.log('submit button event handler');
     randomiseNames(race);
@@ -154,6 +157,7 @@ function getBets(race) {
     console.log("Points" + race + ": " + raceData['Points' + race]);
     // resetBets(i);
     displayResults(race);
+    betRanking = {};
   });
 }
 
