@@ -45,10 +45,14 @@ code {
   border: 2px solid red;
 }
 
+.container_table {
+  border: 2px solid orange;
+}
+
 .main_content {
 }
 
-/* Show/hide elements
+/* Navbar and Headers
 -------------------------------------------------- */
 
 .custom_navbar {
@@ -68,12 +72,7 @@ code {
 /* Show/hide elements
 -------------------------------------------------- */
 
-.hidden {
-  display: none;
-}
-
-.container_table {
-  border: 2px solid orange;
+.hidden, .container_table {
   display: none;
 }
 
@@ -88,7 +87,6 @@ code {
 
 h2, h3 {
   font-family: 'Open Sans', sans-serif;
-  text-align: center;
 }
 
 h2 {
@@ -97,6 +95,7 @@ h2 {
 
 h3 {
   font-size: 1.25em;
+  text-align: center;
   color: #000D10;
 }
 
@@ -113,7 +112,6 @@ h3 {
 
 #raceList button {
   margin: 1em auto;
-  display: block;
 }
 
 
@@ -151,13 +149,15 @@ tr:nth-of-type(2n) {
   background-color: #002B36;
 }
 
+tr td:nth-child(1) {
+  width: 10em;
+}
+
 td {
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
-  font-style: bold;
   font-weight: 700;
-  text-align: center;
-  padding: 0.2em 1.25em;
+  padding-left: 2em;
 
 }
 
