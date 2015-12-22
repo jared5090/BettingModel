@@ -13,12 +13,10 @@ var raceData = {};
 
 var raceTable = $('#current_race_template').html();
 var resultsTable = $('#results_template').html();
-var optionTags = "<option class='format_text'></option>";
-var button = "<button></button>";
 
 
 function printButtons(race) {
-  $('#raceList').append(button);
+  $('#raceList').append("<button></button>");
   $('#raceList').find('button').last().attr('id', 'button_race' + race);
   $('#button_race' + race).text('Race ' + letters[race]);
   //clicking button for a race triggers creation of its table
@@ -59,7 +57,7 @@ function printTable(race) {
   $('#reset_race' + race).hide();
   var raceID = $('#race' + race);
   //print race title
-  raceID.before('<h3>Race ' + letters[race] + '</h3>');
+  raceID.before("<h3>Race " + letters[race] + "</h3>");
   //print table rows. In first column, name is printed from 2D array.
   //In second column, options are appended to a dropdown menu.
   //First option is the default ('select').
@@ -68,7 +66,7 @@ function printTable(race) {
     raceID.find('tr').last().find('td').first().text(raceNames[race][j]);
     raceID.find('.betMenu').last().attr('val', raceNames[race][j]);
     for (var k = -1; k < raceNames[race].length; k++) {
-      raceID.find('.betMenu').last().append(optionTags);
+      raceID.find('.betMenu').last().append("<option></option>");
       if (k !== -1) {
         raceID.find('option').last().attr('val', k);
         raceID.find('option').last().text(positions[k]);
@@ -133,14 +131,12 @@ function getBets(race) {
     $('#submit_race' + race).hide();
     $('#reset_race' + race).show();
     event.preventDefault();
-    console.log('submit button event handler');
     randomiseNames(race);
     var position = '';
     var name = '';
     for (var j = 0; j < raceNames[race].length; j++) {
       position = $('#' + raceData['IDs' + [race]][j]).val();
       name = $('#' + raceData['IDs' + [race]][j]).attr('val');
-      console.log("name: " + name + "\nposition: " + position);
       betRanking[position] = name;
     }
     console.log('betRanking object');
@@ -154,7 +150,7 @@ function getBets(race) {
     //testing
     console.log(raceData['Bets' + [race]]);
     checkBets(race);
-    console.log("Points" + race + ": " + raceData['Points' + race]);
+    console.log("Points" + ": " + raceData['Points' + race]);
     // resetBets(i);
     displayResults(race);
     betRanking = {};

@@ -72,12 +72,12 @@ code {
 /* Text Format
 -------------------------------------------------- */
 
-h2 {
+h2, h3 {
   font-family: 'Open Sans', sans-serif;
+  color: #FFF;
 }
 
 h3 {
-  font-family: 'Open Sans', sans-serif;
   font-size: 1.5em;
 }
 
@@ -96,7 +96,7 @@ h3 {
 }
 
 
-/* Dropdown Menus
+/* Tables and Dropdown Menus
 -------------------------------------------------- */
 
 #current_race {
@@ -107,12 +107,17 @@ h3 {
 table {
   margin: 10px 0 40px 0;
   padding: 1em;
-  background-color: #FF9F64;
+  background-color: #f1f2f4;
   border: 1px solid black;
 }
 
+tr:nth-of-type(2n) {
+  background-color: #E4E6EA;
+} 
+
 .head_row {
-  background-color: #FF7825;
+  color: #FFF;
+  background-color: #002B36;
 }
 
 td {
@@ -125,6 +130,9 @@ td {
 
 }
 
+.highlight {
+  background-color: green;
+}
 
 /*dropdown menus*/
 .betMenu {
@@ -133,7 +141,7 @@ td {
   margin: 0.4em 0.6em;
 }
 
-.betButton {
+.submit_button, .reset_button {
   font-family: 'Open Sans', sans-serif;
   margin: 0 0 20px 25px;
   background-color: #CEDBE5;

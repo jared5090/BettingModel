@@ -23,10 +23,17 @@ function displayResults(race) {
     $('#results' + race).find('tr').last().after(newRow);
     $('#results' + race).find('tr').last().find('td').first().append(raceRandomNames[race][i]);
     $('#results' + race).find('tr').last().find('td').first().next().append(positions[i]);
-    //this row (Your Bets) lists the positions chosen for each athlete.
+    //this column (Your Bets) finds and prints the position the user chose
+    //for an athlete. E.g. if athlete is 'alpha', the betRanking object
+    //is searched for a key with value of alpha.
     for (var j = 0; j < raceRandomNames[race].length; j++) {
       if (betRanking[positions[j]] === raceRandomNames[race][i]) {
         $('#results' + race).find('tr').last().find('td').last().append(positions[j]);
+        if (positions[j] === positions[i]) {
+          $('#results' + race).find('tr').last().find('td').first().addClass('highlight');
+          $('#results' + race).find('tr').last().find('td').first().next().addClass('highlight');
+          $('#results' + race).find('tr').last().find('td').last().addClass('highlight');
+        }
         break;
       }   
     }
@@ -53,7 +60,8 @@ function resetBets(race) {
       $(this).find('option').first().html(
         "<option class='format_text' selected>select</option>");
     });
-    raceData['RandomNames' + race] = [];
+    raceRandomNames[race] = [];
+    console.log('raceRandomNames: ' + raceRandomNames);
     raceData['Bets' + race] = [];
     raceData['Points' + race] = 0;
 
