@@ -9,29 +9,43 @@ function checkBets(race) {
 }
 
 function displayResults(race) {
+  console.log(' ran displayResults');
   var newRow =
     "<tr>" +
       "<td></td>" +
       "<td></td>" +
       "<td></td>" +
     "</tr>";
-  var resultsTable = $('#results').html();
-  if ($('#results').children('table').last().attr('id') !== undefined ) {
-    $('#results').append(resultsTable);
-  }
-  $('#results').children('table').last().attr('id', 'results' + race);
+  $('#results').append(resultsTable);
+  $('#results').children('div').last().attr('id', 'results' + race);
+  $('#results').find('.reset_button').last().attr('id', 'reset_race' + race);
+  var raceID = $('#results' + race);
+  raceID.prepend("<h3>Results</h3>");
+  //print table rows.
   for (var i = 0; i < raceNames[race].length; i++) {
-    $('#results' + race).find('tr').last().after(newRow);
-    $('#results' + race).find('tr').last().find('td').first().append(positions[i]);
-    //this row lists the positions you chose for each athlete.
+    raceID.find('tr').last().after(newRow);
+    raceID.find('tr').last().find('td').first().append(raceRandomNames[race][i]);
+    raceID.find('tr').last().find('td').first().next().append(positions[i]);
+    
+    //this column (Your Bets) finds and prints the position the user chose
+    //for an athlete. E.g. if athlete is 'alpha', the betRanking object
+    //is searched for a key with value of alpha.
     for (var j = 0; j < raceRandomNames[race].length; j++) {
       if (betRanking[positions[j]] === raceRandomNames[race][i]) {
-        $('#results' + race).find('tr').last().find('td').first().next().append(positions[j]);
+        raceID.find('tr').last().find('td').last().append(positions[j]);
+        if (positions[j] === positions[i]) {
+          raceID.find('tr').last().find('td').first().addClass('highlight');
+          raceID.find('tr').last().find('td').first().next().addClass('highlight');
+          raceID.find('tr').last().find('td').last().addClass('highlight');
+        }
         break;
       }   
     }
-    $('#results' + race).find('tr').last().find('td').last().append(raceRandomNames[race][i]);
   }
+  //display results table.
+  raceID.addClass('display_table');
+
+  resetBets(race);
 }
 
 
@@ -42,9 +56,23 @@ Purpose: display bar for each race that corresponds to points scored.
 //   $('dd#' + 'race' + race).addClass('percentage-' + raceData['Points' + race]);
 // }
 
-// function resetBets(race) {
-//   raceData['RandomNames' + race] = [];
-//   raceData['Bets' + race] = [];
-//   raceData['Points' + race] = 0;
-// }
+function resetBets(race) {
+  console.log('ran resetBets');
+  $('#reset_race' + race).on('click', function(event) {
+    event.preventDefault();
+    console.log('ran click listener for resetBets');
+    $('#reset_race' + race).hide();
+    $('#submit_race' + race).show();
+    $('#results' + race).remove();
+    $('.betMenu').each( function() {
+      $(this).find('option').first().html(
+        "<option selected>select</option>");
+    });
+    raceRandomNames[race] = [];
+    console.log('raceRandomNames: ' + raceRandomNames);
+    raceData['Bets' + race] = [];
+    raceData['Points' + race] = 0;
+
+  });
+}
 

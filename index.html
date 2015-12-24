@@ -1,129 +1,80 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Racing Bets</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-
-    <link href="bootstrap.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="page-style.css" rel="stylesheet">
-    <link href="graph-style.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<head>
+  <meta charset="utf-8">
+  <title>Racing Bets</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="bootstrap.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="page-style.css" rel="stylesheet">
+  <link href="graph-style.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type 0='text/css'>
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
+      <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+      <!-- Fav and touch icons -->
+      <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="ico/favicon.png">
-  </head>
+      <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+      <link rel="shortcut icon" href="ico/favicon.png">
+    </head>
 
-
-  <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
+    <body>
+      <div class="container custom_navbar head_row">
+        <h2 class='nav_header'>
+          Racing Bets
+        </h2>
+      </div>
+      <div class="container main_content">
+        <!-- Begin page content -->
+        <div class="page-header">
+          <h2>Jacksonville Dogs</h2>
+        </div>
+        <div id="raceList">
+          <h3>Select Race</h3>
+        </div>
+        <div id='current_race'></div>
+        <div id='results'></div>
+        <div class='hidden'>
+          <div id='current_race_template'>
+            <div class='container_table'>
+              <div class='table_button'>
+                <button class='submit_button'>Submit Bets</button>
+              </div>
+              <table>
+                <tr class='head_row'>
+                  <td>Athlete</td>
+                  <td>Rank</td>
+                </tr>
+              </table>
+            </div>
+          </div> 
+          <div id='results_template'>
+            <div class='container_table'>
+              <div class='table_button'>
+                <button class='reset_button'>Reset Bets</button>
+              </div>
+              <table>
+                <tr class='head_row'>
+                  <td>Athlete</td>
+                  <td>Ranking</td>
+                  <td>Your Bets</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      <footer class="footer">
         <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="#">Racing Bets</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+          <p class="text-muted">Racing Bets Demo</p>
         </div>
-      </div>
-    </div>
-
-    <div class="container">
-
-      <!-- Begin page content -->
-      <div class="page-header">
-        <h2>Jacksonville Dog Racing</h2>
-      </div>
-      <div id="raceList">
-        <h3>Select Race</h3>
-      </div>
-      <div id="currentRace">
-        <div class='container_table hide_table'>
-          <form>
-            <table>
-              <tr class='head_row'>
-                <td>Rank</td>
-                <td>Athlete</td>
-              </tr>
-            </table>
-          </form>
-        </div>
-      </div>
-      <div id='results'>
-        <table>
-          <tr class='head_row'>
-            <td>Rank</td>
-            <td>Your Bet</td>
-            <td>Athlete</td>
-          </tr>
-        </table>
-      </div>
-      <div id='place_bet'>
-        <p>Bet Amount:</p>
-        <span>$</span>
-        <input type='text'>
-        <button id='submit_bet'>Submit Bet</button>
-      <div>
-    <form id="checkBets">
-      <input type="submit" id="checkBetsButton" value="Check Bets">
-    </form>
-    <section>
-    <div id="graphs">
-      <dl>
-        <dt>Races</dt>
-        <dd id='redRace' class="percentage">
-          <span class="text">
-            Red Race
-          </span>
-        </dd>
-        <dd id='greenRace' class="percentage">
-          <span class="text">
-            Green Race
-          </span>
-        </dd>
-        <dd id='blueRace' class="percentage
-        ">
-          <span class="text">
-            Blue Race
-          </span>
-        </dd>
-      </dl>
-    </div>
-    <div class="container">
-      <p id="displayColor">test</p>
-    </div>
-    </section>
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted">Place sticky footer content here.</p>
-      </div>
-    </footer>
+      </footer>
 
 
     <!-- Bootstrap core JavaScript
@@ -133,4 +84,4 @@
     <script src="setupBets.js"></script>
     <script src="placeBets.js"></script>
   </body>
-</html>
+  </html>

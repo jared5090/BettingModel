@@ -12,7 +12,7 @@ body {
 .footer {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: auto;
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #f5f5f5;
@@ -22,10 +22,6 @@ body {
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
-
-body > .container {
-  padding: 60px 15px 0;
-}
 
 .container .text-muted {
   margin: 20px 0;
@@ -40,79 +36,138 @@ code {
   font-size: 80%;
 }
 
-.container_table {
-  border: 2px solid orange;
-}
-
 .container > form {
   border: 2px solid black;
   display: inline-block;
 }
 
 .container {
-  border: 2px solid red;
 }
+
+.container_table {
+}
+
+.main_content {
+}
+
+/* Navbar and Headers
+-------------------------------------------------- */
+
+.custom_navbar {
+  width: auto;
+  height: 5em;
+}
+
+.nav_header {
+  margin: 0.75em 2em;
+}
+
+.page-header {
+  text-align: center;
+}
+
+
+/* Show/hide elements
+-------------------------------------------------- */
+
+.hidden, .container_table {
+  display: none;
+}
+
+.display_table {
+  display: inline-block;
+}
+
+
 
 /* Text Format
 -------------------------------------------------- */
 
-h2 {
+h2, h3 {
   font-family: 'Open Sans', sans-serif;
 }
 
-h3 {
-  font-family: 'Open Sans', sans-serif;
+h2 {
   font-size: 1.5em;
 }
 
+h3 {
+  margin: 0;
+  display: inline-block;
+  font-size: 1.25em;
+  text-align: left;
+  color: #000D10;
+}
+
+.container_table h3 {
+  margin-left: 1em;
+}
 
 /* Race List
 -------------------------------------------------- */
 
 #raceList {
-  border: 2px solid blue;
+  margin-left: 11.5em;
+  position: absolute;
+  width: auto;
   display: inline-block;
 }
 
 #raceList button {
-  margin: 1em auto;
-  display: block;
+  margin: 0.4em 0.8em;
 }
 
 
-/* Dropdown Menus
+/* Tables and Dropdown Menus
 -------------------------------------------------- */
 
-.hide_table {
-  display: none;
-}
-
-#currentRace {
-  border: 2px solid green;
+#current_race, #results {
   display: inline-block;
 }
 
+#results {
+  margin: 5em 0 0 4em;
+}
+
+#current_race {
+  margin: 5em 0 0 11.5em;
+}
+
+#current_race .head_row td:nth-child(2) {
+  padding-left: 4em;
+}
+
 table {
-  margin: 10px 0 40px 0;
+  margin: 0;
   padding: 1em;
-  background-color: #FF9F64;
+  background-color: #f1f2f4;
   border: 1px solid black;
 }
 
+tr:nth-of-type(2n) {
+  background-color: #E4E6EA;
+} 
+
 .head_row {
-  background-color: #FF7825;
+  color: #FFF;
+  background-color: #002B36;
+}
+
+tr td:nth-child(1) {
+  width: 10em;
 }
 
 td {
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
-  font-style: bold;
   font-weight: 700;
-  text-align: center;
-  padding: 0.2em 1.25em;
+  padding-left: 2em;
 
 }
 
+.highlight {
+  background-color: green;
+}
 
 /*dropdown menus*/
 .betMenu {
@@ -121,16 +176,14 @@ td {
   margin: 0.4em 0.6em;
 }
 
-.betButton {
-  font-family: 'Open Sans', sans-serif;
-  margin: 0 0 20px 25px;
-  background-color: #CEDBE5;
+.table_button {
+  display: inline-block;
+  margin: 0 0 0 4.5em;
 }
 
-#checkBetsButton {
+.submit_button, .reset_button {
+  margin-bottom: 1em;
   font-family: 'Open Sans', sans-serif;
-  margin: 1.5em 0 0 10em;
-  padding: 0.75em 1em;
   background-color: #CEDBE5;
 }
 
