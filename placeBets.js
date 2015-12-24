@@ -20,7 +20,7 @@ function displayResults(race) {
   $('#results').children('div').last().attr('id', 'results' + race);
   $('#results').find('.reset_button').last().attr('id', 'reset_race' + race);
   var raceID = $('#results' + race);
-  raceID.prepend("<h3>Race " + letters[race] + " Results</h3>");
+  raceID.prepend("<h3>Results</h3>");
   //print table rows.
   for (var i = 0; i < raceNames[race].length; i++) {
     raceID.find('tr').last().after(newRow);
